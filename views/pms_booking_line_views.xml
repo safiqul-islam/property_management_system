@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+
+
+        <record id="view_pms_booking_line_form" model="ir.ui.view">
+            <field name="name">pms.boooking.line.form</field>
+            <field name="model">pms.boooking.line</field>
+            <field name="arch" type="xml">
+                <form>
+
+                    <header>
+                        <field name='state' widget='statusbar'/>
+                    </header>
+
+                    <sheet>
+
+                        <group>
+                            <field name="property_id"/>
+                            <field name="start_date" />
+                            <field name="end_date" />
+
+                        </group>
+
+                    </sheet>
+                
+                </form>
+            </field>
+        </record>
+
+
+
+       <record id="pms_booking_line_view_tree" model="ir.ui.view">
+            <field name="name">pms.boooking.line.tree</field>
+            <field name="model">pms.boooking.line</field>
+            <field name="arch" type="xml">
+                <tree decoration-success="availability == 'available' " decoration-danger="availability == 'not available' ">
+                 
+                   <field name="property_id" /> 
+                   <field name="start_date" /> 
+                   <field name="end_date" />
+                   <field name="availability" />
+                   <field name="create_date" optional='hide' />
+                 
+                 </tree>
+            </field>
+        </record> 
+
+
+<!-- action for all booking line -->
+        <record id="action_pms_booking_line" model="ir.actions.act_window">
+            <field name="name">Booking Line</field>
+            <field name="res_model">pms.boooking.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create A Record
+                </p>
+            </field>
+        </record>
+
+
+    </data>
+
+</odoo>

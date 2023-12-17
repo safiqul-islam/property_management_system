@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pms_property,pms.property,model_pms_property,base.group_user,1,1,1,1
+access_pms_customer,pms.customer,model_pms_customer,base.group_user,1,1,1,1
+access_pms_tag,pms.property.tag,model_pms_property_tag,base.group_user,1,1,1,1
+access_pms_property_tag_type,pms.property.tag.type,model_pms_property_tag_type,base.group_user,1,1,1,1
+access_pms_property_contract,pms.property.contract,model_pms_property_contract,base.group_user,1,1,1,1
+access_pms_property_sold,pms.property.sold,model_pms_property_sold,base.group_user,1,1,1,1
+access_pms_delivery,pms.delivery,model_pms_delivery,base.group_user,1,1,1,1
+access_pms_payment,pms.payment,model_pms_payment,base.group_user,1,1,1,1
+access_pms_property_category,pms.property.category,model_pms_property_category,base.group_user,1,1,1,1
+access_pms_report,pms.report,model_pms_report,base.group_user,1,1,1,1
+access_pms_boooking_line,pms.boooking.line,model_pms_boooking_line,base.group_user,1,1,1,1
+access_pms._payment_terms,pms.payment.terms,model_pms_payment_terms,base.group_user,1,1,1,1
+access_pms_payment_bill,pms.payment.bill,model_pms_payment_bill,base.group_user,1,1,1,1
+access_pms_transaction_line,pms.transaction.line,model_pms_transaction_line,base.group_user,1,1,1,1

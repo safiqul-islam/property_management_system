@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+
+
+
+<!-- action for property tag type -->
+        <record id="action_pms_property_tag_type" model="ir.actions.act_window">
+            <field name="name">Tag type</field>
+            <field name="res_model">pms.property.tag.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create A Record
+                </p>
+            </field>
+        </record>
+
+   </data>
+</odoo>

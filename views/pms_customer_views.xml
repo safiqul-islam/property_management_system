@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+
+
+
+    <!--School Management Form View-->
+       <record id="pms_customer_view_form" model="ir.ui.view">
+            <field name="name">pms.customer.form</field>
+            <field name="model">pms.customer</field>
+            <field name="arch" type="xml">
+                <form >
+                    <sheet>
+                       <field name="photo" widget="image" class="oe_avatar"/>
+                       
+                        
+                       <div class="oe_title">
+                       
+                                <h1>
+                                    <field name="name"/>
+                                </h1>
+                            </div>
+                        <group >
+                     
+                            <group>
+                                
+                                <field name="date_of_birth"/>
+                                <field name="gender"/>
+
+                            </group>
+                            <group>
+                                <field name="occupation"/>
+                                <field name="job_position"/>
+                                <field name="nid_number"/>
+                            </group>
+                           
+                        </group>
+
+                        <notebook>
+                            <page string="Contact information">
+
+                                <group >
+
+                                    <field name="address"/>
+                                    <field name="post_code"/>
+                                    <field name="phone"/>
+                                    <field name="email"/>
+                                    <field name="is_broker"/>
+                                </group>
+
+                            </page>
+                            <page string='Invoicing'>
+                                <field name='invoice_ids' readonly='1'/>
+                            </page>
+                            <!-- <page string='Booking'>
+                                <field name='booking_ids' readonly='1'/>
+                            </page> -->
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+
+<!-- tree view of proeprty -->
+       <record id="pms_customer_view_tree" model="ir.ui.view">
+            <field name="name">pms.customer.tree</field>
+            <field name="model">pms.customer</field>
+            <field name="arch" type="xml">
+                <tree >
+                   <field name="name" />
+                   <field name="name" />
+                   <field name="gender" />
+                </tree>
+            </field>
+        </record>
+
+
+
+  <record id="pms_customer_view_kanban" model="ir.ui.view">
+            <field name="name">pms.customer.kanban</field>
+            <field name="model">pms.customer</field>
+            <field name="arch" type="xml">
+                <kanban class="o_res_partner_kanban" sample="1">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="is_broker"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                              
+                                <div class="o_kanban_image_fill_left o_kanban_image_full">
+                                    <field name="photo" widget="image" class="oe_avatar" />
+                                </div>
+                               
+                                <div class="ribbon ribbon-top-right" attrs="{'invisible': [('is_broker', '!=', True)]}">
+                                    <span class="bg-success">Agent</span>
+                                </div>
+                                <div class="oe_kanban_details d-flex flex-column justify-content-between">
+                                    <div>
+                                        <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong><br/>
+                                        <span class=" o_kanban_tags_section"><field name="occupation"/></span>
+                                        <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                        <ul>
+                                           
+                                            <li t-if="record.email.raw_value" class="o_text_overflow"><field name="email"/></li><br/>
+                                            <li t-if="record.phone.raw_value" class="o_text_overflow"><field name="phone"/></li><br/>
+                                            <li t-if="record.address.raw_value" class="o_text_overflow"><field name="address"/></li><br/>
+                                        </ul>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left"/>
+                                        <div class="oe_kanban_bottom_right"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+
+
+<!-- action for all customer -->
+        <record id="action_pms_customer" model="ir.actions.act_window">
+            <field name="name">Customers</field>
+            <field name="res_model">pms.customer</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_broker','!=',True)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create A Record
+                </p>
+            </field>
+        </record>
+
+
+
+
+
+<!-- action for all customer -->
+        <record id="action_pms_broker" model="ir.actions.act_window">
+            <field name="name">Brokers</field>
+            <field name="res_model">pms.customer</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="domain">[('is_broker','=',True)]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create A Record
+                </p>
+            </field>
+        </record>
+
+   </data>
+</odoo>

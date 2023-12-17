@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="sequence_booking" model="ir.sequence">
+        <field name="name">PMS Booking Sequence</field>
+        <field name="code">pms_booking_sequence</field>
+        <field name="prefix">B</field>
+        <field name="padding">5</field>
+    </record>
+
+
+    <record id="sequence_delivery" model="ir.sequence">
+        <field name="name">PMS Delivery Sequence</field>
+        <field name="code">pms_delivery_sequence</field>
+        <field name="prefix">D</field>
+        <field name="padding">5</field>
+    </record>
+
+
+
+    <record id="sequence_invoice" model="ir.sequence">
+        <field name="name">PMS Invoice Sequence</field>
+        <field name="code">pms_invoice_sequence</field>
+        <field name="prefix">INVC</field>
+        <field name="padding">5</field>
+    </record>
+
+
+    <record id="sequence_transaction" model="ir.sequence">
+        <field name="name">PMS Transaction Sequence</field>
+        <field name="code">pms_transaction_sequence</field>
+        <field name="prefix">TRA</field>
+        <field name="padding">5</field>
+    </record>
+
+</odoo>

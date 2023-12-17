@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+        <record id="view_pms_payment_wizard_form" model="ir.ui.view">
+            <field name="name">pms.payment.bill.form</field>
+            <field name="model">pms.payment.bill</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+
+                        <group>
+                            <field name="payment_method"  widget="radio"/>
+                            <field name="is_bank" invisible='1'/>
+
+                            <field name="bank_name" attrs="{'invisible': [('is_bank', '=', False)]}"/>
+                            <field name="branch" attrs="{'invisible': [('is_bank', '=', False)]}"/>
+                            <field name="account_number" attrs="{'invisible': [('is_bank', '=', False)]}"/>
+
+                        </group>
+
+
+                        <group>
+                            <field name="invoicing_type" widget="radio"/>
+                            <field name="is_down_payment" invisible='1' />
+                            <field name="down_payment_amount" attrs="{'invisible': [('is_down_payment', '=', False)]}"/>
+                        </group>
+
+                    </group>
+                    <footer>
+                        <button string="Create" class="oe_highlight" type="object" name="create_bill"/>
+                        <!-- <button string="Cancel" class="oe_link" onclick="window.close()"/> -->
+                        <button string="Cancel" class="btn-secondary" special="cancel"/> 
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+
+<!-- action for property tag type -->
+        <record id="action_pms_payment_wizard" model="ir.actions.act_window">
+            <field name="name">PMS Payment</field>
+            <field name="res_model">pms.payment.bill</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="property_management_system.view_pms_payment_wizard_form" />
+            <field name="target">new</field>
+    
+        </record>
+
+
+    </data>
+
+</odoo>

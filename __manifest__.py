@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*-
+{
+  'name': 'Property Management System',
+  'version': '16.0.1.0.0',
+  'category': '',
+  'author': 'Safiqul Islam',
+  'website': "propertymanagementsystem.com",
+  'company': 'Bista Solutions',
+  'maintainer': 'Bista Solutions',
+  'summary': 'Record Property Details and property selling transactions',
+  "description": """To manage Property""",
+  'depends': ['base'],
+  'data': [
+        'security/ir.model.access.csv',
+        # 'security/pms_security.xml',
+        'views/pms_property_views.xml',
+        'views/pms_customer_views.xml',
+        'views/pms_tag_type_views.xml',
+        'views/pms_property_tag_views.xml',
+        'views/pms_property_contract_views.xml',
+        'views/pms_property_sold_views.xml',
+        'views/pms_delivery_views.xml',
+        'views/pms_payment_views.xml',
+        'views/pms_property_category_views.xml',
+        'views/pms_booking_sequence.xml',
+        'views/pms_report_wizard.xml',
+        'views/pms_booking_line_views.xml',
+        'views/pms_payment_term_views.xml',
+        'views/pms_pyment_wizard.xml',
+        'views/pms_transaction_line_views.xml',
+
+        'report/booking_reports.xml',
+
+
+        'views/pms_menu_view.xml',
+  ],
+  'qweb': [],
+  "license": "AGPL-3",
+  'installable': True,
+  'application': True,
+  'auto_install': False,
+}

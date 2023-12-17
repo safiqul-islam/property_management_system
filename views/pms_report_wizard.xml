@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+        <record id="view_pms_report_wizard_form" model="ir.ui.view">
+            <field name="name">pms.report.form</field>
+            <field name="model">pms.report</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date" />
+                    </group>
+                    <footer>
+                        <button string="Search" class="oe_highlight" type="object" name="button_search"/>
+                        <button string="Cancel" class="oe_link" onclick="window.close()"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+<!-- action for property tag type -->
+        <record id="action_pms_report" model="ir.actions.act_window">
+            <field name="name">PMS Report</field>
+            <field name="res_model">pms.report</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="property_management_system.view_pms_report_wizard_form" />
+            <field name="target">new</field>
+    
+        </record>
+
+    </data>
+
+</odoo>

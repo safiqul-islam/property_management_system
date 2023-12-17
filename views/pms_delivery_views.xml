@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+
+
+
+       <record id="pms_delivery_view_form" model="ir.ui.view">
+                <field name="name">pms.delivery.form</field>
+                <field name="model">pms.delivery</field>
+                <field name="arch" type="xml">
+                    <form string="Property delivery">
+                        <header>
+                        <!-- attrs="{'invisible': [('state', '=', 'done')]}" -->
+                            <button name="validate_delivery" string="Validate"  class="oe_highlight" type="object"/>
+                            <!-- <button name="cancel_booking" string="Cancel" attrs="{'invisible': [('state', '!=', 'confirmed')]}" class="oe_highlight" type="object"/>
+                            <button name="make_draft" string="Draft" attrs="{'invisible': [('state', '!=', 'cancelled')]}" class="oe_highlight" type="object"/>
+                            -->
+                             <button name="action_open_payment_wizard" string="Create Bill"  class="oe_highlight" type="object"/>
+                            <field name='state' widget='statusbar'/>
+  
+                        </header>
+
+                        <sheet>
+                            <!-- <div class="oe_button_box" name="button_box" >
+
+                                <button name="make_payment" string="Delivery" attrs="{'invisible': [('state', '!=', 'confirmed')]}" icon="fa-solid fa-truck" type="object">
+                                    <span class='o_stat_text'>Delivery:</span>
+                                    <field name='delivery_count' class='o_stat_text' readonly='1' />
+                                 </button>
+
+
+                                <button name="make_invoice" string="Invoice" attrs="{'invisible': [('state', '!=', 'confirmed')]}" icon="fa-solid fa-edit" type="object">
+                                    <span class='o_stat_text'>Invoice:</span>
+                                    <field name='delivery_count' class='o_stat_text' readonly='1' />
+                                 </button>
+
+                            </div> -->
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="priority" widget="priority" />
+                                    <field name="name"/>
+                                </h1>
+                            </div>
+                            <group >
+                        
+                                <group>
+                                    <field name="customer"/>
+
+                                </group>
+                                <group >
+                                    
+
+                                    <field name="scheduled_date" />
+                                    <field name="deadline" />
+                                    <!-- <field name='availability'/> -->
+                                    
+                                    <field name="source"/> 
+                                   
+                                    
+                                </group>
+
+
+                                
+                            </group>
+                    <notebook>
+
+                        <page string="Properties">
+                           
+                            <field name='property_records'>
+
+                                 <tree editable='1' decoration-success="availability == 'available' "
+                                                                    decoration-danger="availability == 'not available' ">
+                                 
+                                    <field name="property_id"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="currency_id" invisible='1'/>
+                                    <field name="price_per_day"  widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="total_days" />
+                                    
+                                    <field name="availability" widget="badge" decoration-success="availability == 'available' "
+                                                                    decoration-danger="availability == 'not available' " />
+                                    <field name="amount"/>
+                                </tree>
+
+                            </field>
+                            <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                <group colspan="4">
+                                    <field colspan="2" name="note" nolabel="1" placeholder="Terms and conditions..."/>
+                                </group>
+                                <group  class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                    <field name="currency_id" invisible='1'/>
+                                    <field  name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}"  colspan="2" readonly="1"/>
+                                </group>
+                                <div class="clearfix"/>
+                            </group>
+                                
+                        </page>
+
+                        <page string="Additional Information">
+                            <group>
+                                <group>
+                                    <field name='shipping_policy'/>
+                                </group>
+                                <group>
+                                
+                                </group>
+
+                            </group>
+                        </page>
+
+                    </notebook>
+                    
+                        </sheet>
+
+                    </form>
+                </field>
+        </record>
+
+
+
+
+<!-- delivery tree view -->
+       <record id="pms_delivery_view_tree" model="ir.ui.view">
+            <field name="name">pms.delivery.tree</field>
+            <field name="model">pms.delivery</field>
+            <field name="arch" type="xml">
+                <tree >
+                   <field name="priority" widget="priority"/> 
+                   <field name="name" />  
+                   <!-- <field name="customer" /> 
+                   <field name="purpose" /> 
+                   <field name="start_date" /> 
+                   <field name="end_date" />
+                   <field name="amount" />   -->
+
+                 </tree>
+            </field>
+        </record> 
+
+<!-- action for all delivery -->
+        <record id="action_pms_delivery" model="ir.actions.act_window">
+            <field name="name">Delivery</field>
+            <field name="res_model">pms.delivery</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create A Record
+                </p>
+            </field>
+        </record>
+
+   </data>
+</odoo>

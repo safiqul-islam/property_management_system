@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+
+
+  <record id="pms_property_view_form" model="ir.ui.view">
+        <field name="name">pms.property.form</field>
+        <field name="model">pms.property</field>
+        <field name="arch" type="xml">
+            <form string="Property">
+            <header>
+
+                <button name="availableProperty" string="Available" class="oe_highlight" attrs="{'invisible': [('property_status','=','available')] }" type="object"/>
+                <button name="bookProperty" string="Book" property_status='available' attrs="{'invisible': [('|'),('property_status','=','sold'),('for_booking','=',False)] }" class="oe_highlight" type="object"/>
+                <button name="sellProperty" string="Sell" property_status='available' attrs="{'invisible': [('|'),('property_status','=','sold'),('for_sell','=',False)] }" class="oe_highlight" type="object"/>
+
+                <field name='property_status' widget='statusbar'/>
+            </header>
+
+                <sheet>
+                    <group string="Property">
+                
+                        <group>
+                            <field name="name"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            
+                            <field name="tag_ids" widget="many2many_tags"/>
+                            <field name="category_id"/>
+
+                            
+                        </group>
+                        <group string='Sellect Currency'>
+
+                            <field name='currency_id'/>
+
+                            <group string='For Sell'>
+                                <field name='for_sell'/>
+                                <field name="selling_price"/>
+                               
+
+                            </group>
+                            <group string='For Booking'>
+                                <field name='for_booking'/>
+                                <field name="booking_price"/>
+
+                            </group>
+                        </group>
+                        
+                    </group>
+            
+
+                    <notebook>
+
+                        <page string="Feature">
+                            <group>
+                                <group>
+                                    <group string='Garden Information'>
+                                        <field name="garden" widget="boolean_switch"/>
+                                        <field name="garden_area"/>
+                                        <field name="garden_orientation"/>
+                                    </group>
+                                    <group string='Garage Info'>
+                                        <field name="garage" widget="boolean_switch"/>
+                                    </group>
+                                    
+                                </group>
+                                <group>
+                                    <group string='Swimming Pool'>
+                                        <field name="swimming_pool"/>
+                                        <field name="swimming_pool_orientation"/>
+                                    </group>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="About Area">
+                            <group >
+                                <group>
+                                    <group>
+                                        <field name="bedrooms" />
+                                    </group>
+                                    <group>
+                                        <field name="living_area"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="property_file"/>
+                                </group>
+                            </group>
+
+                        </page>
+
+                        <page string="Photo">
+                            <group>
+                                <group>
+                                    <field name="photo" widget="image" />
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Address">
+                            <group>
+                                <group>
+                                    <field name="address"/>
+                                </group>
+                                <group>
+                                    <field name="postalcode"/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Description">
+                            <group>
+                                <group>
+                                    <field name="description"/>
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+            </form>
+        </field>
+   </record>
+
+
+
+
+
+<!-- tree view of proeprty -->
+       <record id="pms_property_view_tree" model="ir.ui.view">
+            <field name="name">pms.property.tree</field>
+            <field name="model">pms.property</field>
+            <field name="arch" type="xml">
+                <tree default_order="create_date desc">
+                   <field name="name" required="1"/>
+                </tree>
+            </field>
+        </record>
+
+
+<!-- action for all proerty -->
+        <record id="action_pms_property" model="ir.actions.act_window">
+            <field name="name">Properties</field>
+            <field name="res_model">pms.property</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create A Record
+                </p>
+            </field>
+        </record>
+        
+
+
+   </data>
+</odoo>

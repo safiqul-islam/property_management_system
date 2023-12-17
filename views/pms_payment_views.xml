@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+
+
+
+        <record id="pms_invoice_view_form" model="ir.ui.view">
+                <field name="name">pms.payment.form</field>
+                <field name="model">pms.payment</field>
+                <field name="arch" type="xml">
+                    <form string="Invoice">
+                        <header>
+
+
+                            <button name="open_payment_wizard" string="Register Payment" class="btn btn-primary" type="object" attrs="{'invisible': [('payment_state', '=', 'paid')]}" />
+                            <field name='state' widget='statusbar'/>
+
+                            <!-- <button name="browse_property" string="Browse" class="oe_highlight" type="object" context="{'amount_val': 123123 }"/>
+                            <button name="search_property" string="Search" class="btn btn-success" type="object"/>
+                            <button name="mapped_property" string="Mapped" class="btn btn-warning" type="object"/>
+                         -->
+                        </header>
+
+                        <sheet>
+
+                            <div class="oe_button_box" name="button_box" >
+
+                                <button name="view_transaction" string="Transaction" attrs="{'invisible': [('state', '=', 'draft')]}" icon="fa-credit-card " type="object">
+                                    <span class='o_stat_text'>Transaction:</span>
+                                    <field name='transaction_count' class='o_stat_text' readonly='1' />
+                                 </button>
+
+
+                                <!-- <button name="make_invoice" string="Invoice" attrs="{'invisible': [('state', '!=', 'confirmed'),('invoice_count','=',0)]}" icon="fa-solid fa-edit" type="object">
+                                    <span class='o_stat_text'>Invoice:</span>
+                                    <field name='invoice_count' class='o_stat_text' readonly='1' />
+                                 </button> -->
+
+                            </div>
+
+                        <field name="payment_state" invisible='1'/>
+                        <!-- Payment status for invoices / receipts -->
+                        <widget name="web_ribbon" title="Paid" attrs="{'invisible': [('payment_state', '!=', 'paid')]}"/>
+                        <widget name="web_ribbon" title="Partially Paid" bg_color="bg-warning" attrs="{'invisible': [('payment_state', '!=', 'partially_paid')]}"/>
+                        <widget name="web_ribbon" title="Not Paid" bg_color="bg-danger" attrs="{'invisible': [('payment_state', '!=', 'not_paid')]}"/>
+                 
+
+                            <div class="oe_title">
+                                <span style='font-weight: 500;'>Customer Invoice</span>
+                                <h1 style='padding-top: 5px;'>
+                                    <field name="name"/>
+                                </h1>
+                            </div>
+
+
+                            <group >
+                        
+                                <group>
+                                    <field name="customer_id"/>
+                                    <field name="customer_address"/>
+                                </group>
+                                <group >
+                                    
+                                    <field name="invoice_date"/>
+                                    <field name="payment_reference"/>
+                                    <field name="payment_terms"/>
+                                    <field name="currency_id"/>
+                                </group>
+                                
+                            </group>
+
+                            <notebook>
+                                <page string="Invoice Line" >
+
+                                    <field name="booking_records_ids" >
+                                        <tree editable='1'>
+                                        
+                                            <field name="property_id"/>
+                                            <field name="start_date"/>
+                                            <field name="end_date"/>
+                                            <field name="currency_id" invisible='1'/>
+                                            <field name="price_per_day"  widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                            <field name="total_days" />
+                                            
+                                            <!-- <field name="availability" widget="badge" decoration-success="availability == 'available' "
+                                                                            decoration-danger="availability == 'not available' " /> -->
+                                            <field name="amount"/>
+                                            <field name="create_date" optional='hide' />
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="name"/>
+                                            </group>
+                                        </form>
+                                    </field>
+                                
+                                    <!-- <field name="transaction_ids" >
+                                        <tree editable='1' >
+                                            <field name="name"/>
+                                        </tree>
+                                        <form>
+                                            <group>
+                                                <field name="name"/>
+                                            </group>
+                                        </form>
+                                    </field> -->
+
+
+                                    <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                        <group colspan="4">
+                                            <field colspan="2" name="note" nolabel="1" placeholder="Terms and conditions..."/>
+                                        </group>
+                                        <group  class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                            <field name="currency_id" invisible='1'/>
+                                            
+                                            <field  name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}"  colspan="2" readonly="1"/>
+                                            <field  name="amount_paid" widget="monetary" options="{'currency_field': 'currency_id'}"  colspan="2" readonly="1"/>
+                                            
+                                            <field name="amount_due" class="oe_subtotal_footer_separator" readonly='1' attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                                        </group>
+                                        <div class="clearfix"/>
+                                    </group>
+
+
+                                    
+                                </page>
+                            </notebook>
+                    
+                        </sheet>
+                    </form>
+                </field>
+        </record>
+
+
+
+<!-- delivery tree view -->
+       <record id="pms_invoice_view_tree" model="ir.ui.view">
+            <field name="name">pms.payment.tree</field>
+            <field name="model">pms.payment</field>
+            <field name="arch" type="xml">
+                <tree default_order="create_date desc">
+                   <field name="name" />  
+                   <field name="customer_id" /> 
+                   <field name="booking_id" /> 
+                   <field name="invoice_date" />
+                   <field name="currency_id" invisible='1'/>  
+                   <field name="amount_total" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                   <field name="amount_paid" widget="monetary" options="{'currency_field': 'currency_id'}"/>  
+                   <field name="amount_due" widget="monetary" options="{'currency_field': 'currency_id'}"/>  
+                   <field name="payment_state" widget="badge" decoration-success="payment_state == 'paid' " decoration-warning="payment_state == 'partially_paid' "
+                                                                            decoration-danger="payment_state == 'not_paid' "  />  
+                   <field name="create_date" optional='hide' />
+                 </tree>
+            </field>
+        </record> 
+
+
+
+<!-- action for all payment -->
+        <record id="action_pms_payment" model="ir.actions.act_window">
+            <field name="name">Delivery</field>
+            <field name="res_model">pms.payment</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create A Record
+                </p>
+            </field>
+        </record>
+
+   </data>
+</odoo>

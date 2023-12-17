@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <data>
+
+       <menuitem
+            id="pms_menu_root"
+            name="Property Management System"
+            sequence="6">
+
+            <menuitem id="pms_order_menu" 
+                name="Order">
+
+                <menuitem id='property_purpose_menu'
+                    name='Purpose'>
+                        <menuitem id="pms_property_booking_sub_menu_1"
+                            name='Booking'
+                            action="action_pms_property_contract"/>
+                            
+                        <menuitem id="pms_property_sold_sub_menu_1"
+                            name='Selling'
+                            action="action_pms_property_sold"/>
+                </menuitem>    
+
+                <menuitem id='property_transaction_menu'
+                    name='Records'>
+                        <menuitem id="pms_property_delivery_sub_menu_1"
+                            name='Delivery'
+                            action="action_pms_delivery"/>
+
+                        <menuitem id="pms_property_payment_sub_menu_1"
+                            name='Payment'
+                            action="action_pms_payment"/>
+
+                </menuitem>
+
+            </menuitem>
+
+            <!--Menu Property Management System-->
+            <menuitem id="pms_menu"
+                name="Property">
+
+                <menuitem id="pms_menu_sub_menu_1"
+                    name='All Property'>
+
+                    <menuitem id="pms_menu_selling_property_1"
+                        name='Property'
+                        action="action_pms_property"/>
+                </menuitem>
+                <menuitem id='pms_menu_sub_menu_2'
+                        name="Property Category">
+
+                    <menuitem id="pms_menu_property_category_1"
+                        name='Category'
+                        action="action_pms_property_category"/>
+
+                </menuitem>
+
+            </menuitem>
+
+            <menuitem id="pms_customer_menu"
+                name="Contact">
+
+                <menuitem id='pms_property_client_menu'
+                    name='Customer'>
+
+                        <menuitem id="pms_customer_sub_menu_1"
+                            name='Client'
+                            action="action_pms_customer"/>
+                </menuitem>
+
+                <menuitem id='pms_internal_stuff_menu'
+                    name='Stuff'>
+
+                        <menuitem id="pms_broker_sub_menu_1"
+                            name='Agent'
+                            action="action_pms_broker"/>
+                </menuitem>
+
+
+            </menuitem>
+
+            <menuitem id="pms_configuration_menu"
+                name="Configuration">
+
+                <menuitem id="pms_tag_type_sub_menu_1"
+                    name='Tag type'
+                    action="action_pms_property_tag_type"/>
+
+                <menuitem id="pms_tag_sub_menu_1"
+                    name='Tag'
+                    action="action_pms_property_tag"/>
+
+                <menuitem id="pms_payment_terms_sub_menu_1"
+                    name='Payment Terms'
+                    action="action_pms_payment_terms"/>
+
+                <menuitem id="pms_booking_line_sub_menu_1"
+                    name='Booking Line'
+                    action="action_pms_booking_line"/>
+
+                <menuitem id="pms_transaction_line_sub_menu_1"
+                    name='Transaction Line'
+                    action="action_pms_transaction_line"/>
+
+            </menuitem>
+
+            <menuitem id="pms_report_menu"
+                name='Report'
+                action="action_pms_report"/>
+
+        </menuitem>
+
+   </data>
+
+</odoo>

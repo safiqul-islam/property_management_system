@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+       <record id="pms_property_contract_view_form" model="ir.ui.view">
+                <field name="name">pms.property.contract.form</field>
+                <field name="model">pms.property.contract</field>
+                <field name="arch" type="xml">
+                    <form string="Property Booking">
+                        <header>
+
+                            <field name='confirm_button_show' invisible='1'/>
+                            <button name="confirm_action" string="Confirm" attrs="{'invisible': [('confirm_button_show', '!=', True)]}" class="oe_highlight" type="object"/>
+                            <button name="cancel_booking" string="Cancel" attrs="{'invisible': [('|'),('state', '=', 'cancelled'),('state', '=', 'confirmed')]}" class="oe_highlight" type="object"/>
+                            <button name="make_draft" string="Draft" attrs="{'invisible': [('state', '!=', 'draft')]}" class="oe_highlight" type="object"/>
+                           
+                            <!-- <button string="Report" type="object" name="action_open_wizard" class="oe_highlight"/> -->
+
+                           
+                            <field name='state' widget='statusbar'/>
+  
+                        </header>
+
+                        <sheet>
+
+                            <div class="oe_button_box" name="button_box" >
+
+                                <!-- <button name="make_payment" string="Delivery" attrs="{'invisible': [('state', '!=', 'confirmed')]}" icon="fa-solid fa-truck" type="object">
+                                    <span class='o_stat_text'>Delivery:</span>
+                                    <field name='delivery_count' class='o_stat_text' readonly='1' />
+                                 </button> -->
+
+
+                                <button name="make_invoice" string="Invoice" attrs="{'invisible': [('state', '!=', 'confirmed'),('invoice_count','=',0)]}" icon="fa-solid fa-edit" type="object">
+                                    <span class='o_stat_text'>Invoice:</span>
+                                    <field name='invoice_count' class='o_stat_text' readonly='1' />
+                                 </button>
+
+                            </div>
+                            <div class="oe_title">
+                                <h1>
+                                    <!-- <field name="priority" widget="priority" /> -->
+                                    <field name="name"/>
+                                </h1>
+                            </div>
+                            <group >
+                        
+                                <group >
+                                    <!-- <field name="property_id" />
+                                    <field name="property_address" /> -->
+                                    <field name="customer" domain="[('is_broker', '=', False)]"/>
+                                    <field name="customer_address" />
+                                    <field name="customer_email" />
+                                    <field name="customer_phone" />
+                                    
+                                    
+                                    
+                                </group>
+                                <group >
+                                    <field name="order_date"/>
+                                    <field name="expiration_date"/>
+                                    <field name="payment_term"/>
+                                    <field name="purpose"/>
+                                    <!-- <field name='payment_status'/> -->
+
+                                    <!-- <group>
+                                        <field name="start_date" /> 
+                                        <field name="end_date" />
+                                    </group> -->
+                                    <!-- <group>
+
+                                        <field name="availability" decoration-success="availability == 'available' "
+                                                                    decoration-danger="availability == 'not available' "/>
+                                        <field name="total_days" />
+                                        <field name='price_per_day'/>
+                                        
+                                        <field name="currency_id" invisible="1"/> 
+                                        <field name="amount" readonly='1'/> 
+                                    </group> -->
+                                    
+                                </group>
+                                
+                            </group>
+
+                    <notebook>
+
+                        <page string="Properties">
+                            <field name="booking_line_ids"  attrs="{'readonly': [('|'),('state', '=', 'confirmed'),('state', '=', 'cancelled')]}">
+                                <!-- <tree widget="one2many_list" options="{'editable': true}"> -->
+                                 <tree editable='1' decoration-success="availability == 'available' "
+                                                                    decoration-danger="availability == 'not available' ">
+                                 
+                                    <field name="property_id" domain="[('for_booking', '!=', False)]"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="currency_id" invisible='1'/>
+                                    <field name="price_per_day"  widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                    <field name="total_days" />
+                                    <field name="availability" widget="badge" decoration-success="availability == 'available' "
+                                                                    decoration-danger="availability == 'not available' "/>
+                                    <field name="amount"/>
+                                    <field name="create_date" optional='hide' />
+                                    
+                                    
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="property_id"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="price_per_day"/>
+                                    </group>
+                                    
+                                </form>
+                            </field>
+
+                            <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                <group colspan="4">
+                                    <field colspan="2" name="note" nolabel="1" placeholder="Terms and conditions..."/>
+                                </group>
+                                <group  class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                                    <field name="currency_id" invisible='1'/>
+                                    <field  name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}"  colspan="2" readonly="1"/>
+                                </group>
+                                <div class="clearfix"/>
+                            </group>
+
+
+                        </page>
+
+                        <page string="Delivery">
+                            <group>
+                                <group>
+                                    <field name='shipping_policy'/>
+                                </group>
+                                <group>
+                                    <field name='delivery_date'/>
+                                    <field name='delivery_status'/>
+                                </group>
+
+                            </group>
+                        </page>
+
+                        <page string="Customer Signature">
+                            <group>
+                                <group>
+
+                                    <field name='signed_by'/>
+                                    <field name='signed_on'/>
+                                </group>
+                                <group>
+                                    <field name='Signature' widget="image"/>
+                                </group>
+                            </group>
+                        </page>
+
+                    </notebook>
+                    
+                        </sheet>
+
+                    </form>
+                </field>
+        </record>
+
+       <record id="pms_property_contract_view_tree" model="ir.ui.view">
+            <field name="name">pms.property.contract.tree</field>
+            <field name="model">pms.property.contract</field>
+            <field name="arch" type="xml">
+                <tree default_order="create_date desc" decoration-info="state == 'draft' " 
+                                                       decoration-muted="state == 'cancelled' " 
+                                                       decoration-success="state == 'confirmed' " 
+                                                       >
+                   <field name='id' optional='hide'/>
+                   <field name="name"  decoration-bf="1"/> 
+                    
+                   <field name="customer" />
+                   <field name="order_date" widget="remaining_days"  /> 
+                   <field name="delivery_date"  widget="remaining_days" />
+                   <field name="expiration_date" widget="remaining_days" /> 
+                   <field name="shipping_policy" widget="badge" optional='hide'/>
+                   <field name="purpose" widget="badge" optional='hide'/>
+                   <field name="currency_id" invisible='1'/>
+
+                   <field name="state" widget="badge" decoration-info="state == 'draft' " 
+                                                       decoration-muted="state == 'cancelled' " 
+                                                       decoration-success="state == 'confirmed' " 
+                                                        />
+                   <field name="total_amount" widget="monetary" options="{'currency_field': 'currency_id'}"/>  
+                   <!-- <field name="due_amount" optional='hide'  widget="monetary" options="{'currency_field': 'currency_id'}" />  -->
+                    
+
+                    <!-- <field name="payment_status" widget="badge" decoration-info="payment_status == 'partially paid' " 
+                                                       decoration-warning="payment_status == 'not paid' " 
+                                                       decoration-success="payment_status == 'fully paid' " 
+                                                       /> -->
+
+                 </tree>
+            </field>
+        </record> 
+
+
+<!-- action for property contract  -->
+        <record id="action_pms_property_contract" model="ir.actions.act_window">
+            <field name="name">Property Contract</field>
+            <field name="res_model">pms.property.contract</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create A Record
+                </p>
+            </field>
+        </record>
+    
+
+    </data>
+
+</odoo>

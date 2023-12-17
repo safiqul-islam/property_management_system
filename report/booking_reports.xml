@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="action_report_booking_order" model="ir.actions.report">
+        <field name="name">PMS Booking Order</field>
+        <field name="model">pms.property.contract</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">property_management_system.report_booking_order</field>
+        <field name="report_file">property_management_system.report_booking_order</field>
+        <field name="print_report_name">(object.name)</field>
+        <field name="binding_model_id" ref="model_pms_property_contract"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="report_booking_order">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout" >
+                <!-- start -->
+
+                    <div class='row'>
+                        <div class='col-12'>
+                        <span> Customer Details </span>
+                            <hr/>
+                           <div class="">
+                                <div>
+                                    <span> Name : </span>
+                                    <span t-esc="doc.customer.name" />
+                                </div>
+                                <div>
+                                    <span> Address : </span>
+                                    <span t-esc="doc.customer.address" />
+                                </div>
+                                <div>
+                                    <span> Phone : </span>
+                                    <span t-esc="doc.customer.phone" />
+                                </div>
+                                <div>
+                                    <span> Email : </span>
+                                    <span t-esc="doc.customer.email" />
+                                </div>
+                           
+                           </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class='row'>
+                        <div class='col-12' style="display: inline-flex; padding-top: 15px;">
+                            <h3>Booking Order # </h3>
+                            <h3 t-esc="doc.name" />
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12" style="display: inline-flex;">
+
+                            <div class='col-6' style=" display: flex;">
+                                <span style="font-weight: 600;">Order Date: </span>
+                                <p t-esc="doc.order_date" />
+
+                            </div>
+                            <div class='col-6' style=" display: inline-flex;text-align: end;">
+
+                                <span style="font-weight: 600;">Responsible Person:</span>
+                                <p t-esc="doc.name"/>
+                            
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class='row '>
+                        <div class='col-12'>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Price per Day</th>
+                                        <th scope="col">Total Days</th>
+                                        <th scope="col">Amount</th>
+                                        
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <t t-foreach="doc.booking_line_ids" t-as="line">
+                                    <tr>
+                                        <td t-esc="line.property_id.name"/>
+                                        <td t-esc="line.start_date"/>
+                                        <td t-esc="line.end_date"/>
+                                        <td><span t-field="line.price_per_day" t-field-options='{"widget": "monetary", "currency_field": "currency_id"}'/></td>
+                                        <td t-esc="line.total_days"/>
+                                        <td><span t-field="line.amount" t-field-options='{"widget": "monetary", "currency_field": "currency_id"}'/></td>
+                                    </tr>
+                                    </t>
+                                    <tr style="border-top: double;border-bottom: azure;">
+                                        <td colspan="6" style="text-align: end;padding-right: 90px;"><span>Total:</span><span t-field="doc.total_amount" t-field-options='{"widget": "monetary", "currency_field": "currency_id"}'/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div>
+                               <span> Payment Terms: <span t-esc="doc.payment_term.name"/></span> 
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                <!-- end -->
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+</odoo>
