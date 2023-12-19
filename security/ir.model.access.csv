@@ -13,3 +13,4 @@ access_pms_boooking_line,pms.boooking.line,model_pms_boooking_line,base.group_us
 access_pms._payment_terms,pms.payment.terms,model_pms_payment_terms,base.group_user,1,1,1,1
 access_pms_payment_bill,pms.payment.bill,model_pms_payment_bill,base.group_user,1,1,1,1
 access_pms_transaction_line,pms.transaction.line,model_pms_transaction_line,base.group_user,1,1,1,1
+access_pms_sale_order_line,pms.sale.order.line,model_pms_sale_order_line,base.group_user,1,1,1,1

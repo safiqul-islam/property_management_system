@@ -9,12 +9,13 @@
             <field name="arch" type="xml">
                 <form>
                     <group>
+                        <field name="model_name"/>
                         <field name="start_date"/>
                         <field name="end_date" />
                     </group>
                     <footer>
                         <button string="Search" class="oe_highlight" type="object" name="button_search"/>
-                        <button string="Cancel" class="oe_link" onclick="window.close()"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/> 
                     </footer>
                 </form>
             </field>

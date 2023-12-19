@@ -33,4 +33,12 @@
         <field name="padding">5</field>
     </record>
 
+
+    <record id="sequence_sale_order" model="ir.sequence">
+        <field name="name">PMS Sale Order Sequence</field>
+        <field name="code">pms_sale_order_sequence</field>
+        <field name="prefix">SL</field>
+        <field name="padding">5</field>
+    </record>
+
 </odoo>

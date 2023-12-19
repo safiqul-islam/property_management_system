@@ -23,6 +23,7 @@ class PmsCustomer(models.Model):
     is_broker = fields.Boolean(string='Is a Broker ?')
     invoice_ids = fields.One2many('pms.payment','customer_id', string='Invoice')
     booking_ids = fields.One2many('pms.property.contract','customer', string='Booking')
+    booking_broker_ids = fields.One2many('pms.property.contract','broker_id', string='Booking')
 
     # @api.onchange('first_name','last_name')
     # def onchange_firs_name_last_name(self):

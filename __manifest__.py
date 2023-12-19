@@ -28,8 +28,12 @@
         'views/pms_payment_term_views.xml',
         'views/pms_pyment_wizard.xml',
         'views/pms_transaction_line_views.xml',
+        'views/pms_sale_order_line_views.xml',
 
         'report/booking_reports.xml',
+        'report/all_booking_reports.xml',
+        'report/all_invoice_reports.xml',
+        'report/all_transaction_reports.xml',
 
 
         'views/pms_menu_view.xml',

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="action_all_report_invoice" model="ir.actions.report">
+        <field name="name">PMS All Invoice</field>
+        <field name="model">pms.payment</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">property_management_system.all_report_invoice</field>
+        <field name="report_file">property_management_system.all_report_invoice</field>
+        <field name="print_report_name">(object.name)</field>
+        <field name="binding_model_id" ref="model_pms_payment"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+
+    <template id="all_report_invoice">
+        <t t-call="web.html_container">
+            <!-- <t t-foreach="docs" t-as="doc"> -->
+                <t t-call="web.external_layout" >
+                <!-- start -->
+
+                    <div class='row'>
+                        <div class='col-12'>
+                        <h3> Invoice Report </h3>
+                            <hr/>
+                           <!-- <div class="">
+                                <div>
+                                    <span> Name : </span>
+                                    <span t-esc="doc.customer.name" />
+                                </div>
+                                <div>
+                                    <span> Address : </span>
+                                    <span t-esc="doc.customer.address" />
+                                </div>
+                                <div>
+                                    <span> Phone : </span>
+                                    <span t-esc="doc.customer.phone" />
+                                </div>
+                                <div>
+                                    <span> Email : </span>
+                                    <span t-esc="doc.customer.email" />
+                                </div>
+                           
+                           </div> -->
+
+
+                        </div>
+                    </div>
+
+
+                    <!-- <div class='row'>
+                        <div class='col-12' style="display: inline-flex; padding-top: 15px;">
+                            <h3>Booking Order # </h3>
+                            <h3 t-esc="doc.name" />
+
+                        </div>
+
+                    </div> -->
+                    <div class="row">
+                        <div class="col-12" style="display: inline-flex;">
+
+                            <div class='col-6' style=" display: flex;">
+                                <span style="font-weight: 600;">Start Date: </span>
+                                <p t-esc="start_date" />
+
+                            </div>
+                            <div class='col-6' style=" display: inline-flex;text-align: end;">
+
+                                <span style="font-weight: 600;">End Date:</span>
+                                <p t-esc="end_date"/>
+                            
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class='row '>
+                        <div class='col-12'>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Booking</th>
+                                        <th scope="col">Customer</th>
+                                        <th scope="col">Invoice Date</th>
+                                        <th scope="col">Payment Status</th>
+                                        <th scope="col">Total Amount</th>
+                                        <th scope="col">Paid Amount</th>
+                                        <th scope="col">Due Amount</th>
+                                        
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <t t-foreach="data_line" t-as="line">
+                                    <tr>
+                                        <td t-esc="line[0]"/>
+                                        <td t-esc="line[1]"/>
+                                        <td t-esc="line[2]"/>
+                                        <td t-esc="line[3]"/>
+                                        <td t-esc="line[4]"/>
+                                        <td ><span>&#36;</span>  <span t-esc="line[5]" /></td>
+                                        <td ><span>&#36;</span>  <span t-esc="line[6]" /></td>
+                                        <td ><span>&#36;</span>  <span t-esc="line[7]" /></td>
+                                        
+                                        <!-- <td><span t-esc="line[6]" t-field-options='{"widget": "monetary", "currency_field": "currency_id"}'/></td> -->
+                                  
+                                    </tr>
+                                    </t>
+                                    <tr style="border-top: double;border-bottom: azure;">
+                                        <td ><span>Total Amount: &#36;</span><span t-esc="amount_total" /></td>
+                                        <td ><span>Total Paid Amount: &#36;</span><span t-esc="amount_paid" /></td>
+                                        <td ><span>Total Due Amount: &#36;</span><span t-esc="amount_due" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div>
+                               <!-- <span> Payment Terms: <span t-esc="doc.payment_term.name"/></span>  -->
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                <!-- end -->
+                </t>
+            <!-- </t> -->
+        </t>
+    </template>
+
+
+
+
+
+
+
+
+
+</odoo>

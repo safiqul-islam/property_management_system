@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <record id="action_all_report_booking" model="ir.actions.report">
+        <field name="name">PMS All Booking Order</field>
+        <field name="model">pms.property.contract</field>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">property_management_system.all_report_booking_order</field>
+        <field name="report_file">property_management_system.all_report_booking_order</field>
+        <field name="print_report_name">(object.name)</field>
+        <field name="binding_model_id" ref="model_pms_property_contract"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+
+    <template id="all_report_booking_order">
+        <t t-call="web.html_container">
+            <!-- <t t-foreach="docs" t-as="doc"> -->
+                <t t-call="web.external_layout" >
+                <!-- start -->
+
+                    <div class='row'>
+                        <div class='col-12'>
+                        <h3> Booking Report </h3>
+                            <hr/>
+                           <!-- <div class="">
+                                <div>
+                                    <span> Name : </span>
+                                    <span t-esc="doc.customer.name" />
+                                </div>
+                                <div>
+                                    <span> Address : </span>
+                                    <span t-esc="doc.customer.address" />
+                                </div>
+                                <div>
+                                    <span> Phone : </span>
+                                    <span t-esc="doc.customer.phone" />
+                                </div>
+                                <div>
+                                    <span> Email : </span>
+                                    <span t-esc="doc.customer.email" />
+                                </div>
+                           
+                           </div> -->
+
+
+                        </div>
+                    </div>
+
+
+                    <!-- <div class='row'>
+                        <div class='col-12' style="display: inline-flex; padding-top: 15px;">
+                            <h3>Booking Order # </h3>
+                            <h3 t-esc="doc.name" />
+
+                        </div>
+
+                    </div> -->
+                    <div class="row">
+                        <div class="col-12" style="display: inline-flex;">
+
+                            <div class='col-6' style=" display: flex;">
+                                <span style="font-weight: 600;">Start Date: </span>
+                                <p t-esc="start_date" />
+
+                            </div>
+                            <div class='col-6' style=" display: inline-flex;text-align: end;">
+
+                                <span style="font-weight: 600;">End Date:</span>
+                                <p t-esc="end_date"/>
+                            
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class='row '>
+                        <div class='col-12'>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Customer</th>
+                                        <th scope="col">Order Date</th>
+                                        <th scope="col">Expiration Date</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Amount</th>
+                                        
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <t t-foreach="data_line" t-as="line">
+                                    <tr>
+                                        <td t-esc="line[0]"/>
+                                        <td t-esc="line[1]"/>
+                                        <td t-esc="line[2]"/>
+                                        <td t-esc="line[3]"/>
+                                        <td t-esc="line[4]"/>
+                                        
+                                        <td><span>&#36;</span><span t-esc="line[5]"/></td>
+                                  
+                                    </tr>
+                                    </t>
+                                    <tr style="border-top: double;border-bottom: azure;">
+                                        <td colspan="6" style="text-align: end;padding-right: 90px;"><span>Total: &#36;</span><span t-esc="total" /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div>
+                               <!-- <span> Payment Terms: <span t-esc="doc.payment_term.name"/></span>  -->
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                <!-- end -->
+                </t>
+            <!-- </t> -->
+        </t>
+    </template>
+
+
+
+
+
+
+
+
+
+</odoo>

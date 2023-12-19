@@ -16,16 +16,16 @@
                             name='Booking'
                             action="action_pms_property_contract"/>
                             
-                        <menuitem id="pms_property_sold_sub_menu_1"
+                        <!-- <menuitem id="pms_property_sold_sub_menu_1"
                             name='Selling'
-                            action="action_pms_property_sold"/>
+                            action="action_pms_property_sold"/> -->
                 </menuitem>    
 
                 <menuitem id='property_transaction_menu'
                     name='Records'>
-                        <menuitem id="pms_property_delivery_sub_menu_1"
+                        <!-- <menuitem id="pms_property_delivery_sub_menu_1"
                             name='Delivery'
-                            action="action_pms_delivery"/>
+                            action="action_pms_delivery"/> -->
 
                         <menuitem id="pms_property_payment_sub_menu_1"
                             name='Payment'
@@ -101,7 +101,10 @@
                 <menuitem id="pms_transaction_line_sub_menu_1"
                     name='Transaction Line'
                     action="action_pms_transaction_line"/>
-
+<!-- 
+                <menuitem id="pms_sale_order_line_sub_menu_1"
+                    name='Sale Order Line'
+                    action="action_pms_sale_order_line"/> -->
             </menuitem>
 
             <menuitem id="pms_report_menu"

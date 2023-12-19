@@ -61,7 +61,7 @@
                                     <field name="order_date"/>
                                     <field name="expiration_date"/>
                                     <field name="payment_term"/>
-                                    <field name="purpose"/>
+                                    <field name="broker_id" domain="[('is_broker', '!=', False)]"/>
                                     <!-- <field name='payment_status'/> -->
 
                                     <!-- <group>

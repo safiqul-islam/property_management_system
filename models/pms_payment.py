@@ -35,9 +35,9 @@ class PmsPayment(models.Model):
 
     transaction_count = fields.Integer(string='Transaction Count', compute='_transaction_count')
 
-
-
-
+    # sale_order_id = fields.Many2one('pms.property.sold',string='Sale Order')
+    # sale_order_line_ids = fields.One2many(string='Properties', related='sale_order_id.sale_order_line_ids')
+    
 
     @api.model
     def create(self, vals):

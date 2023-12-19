@@ -35,6 +35,13 @@ class PmsProperty(models.Model):
     tag_ids = fields.Many2many('pms.property.tag' ,string='Tags')
     category_id = fields.Many2one('pms.property.category', string='Property Category')
 
+    priority = fields.Selection([
+        ('0','Low'),
+        ('1','Normal'),
+        ('2','High'),
+        ('3','Very high')
+        ], string='Priority')
+
 
     def availableProperty(self):
         self.property_status = 'available'

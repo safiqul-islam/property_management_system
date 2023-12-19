@@ -7,40 +7,50 @@
         <field name="name">pms.property.form</field>
         <field name="model">pms.property</field>
         <field name="arch" type="xml">
-            <form string="Property">
+            <form >
             <header>
 
-                <button name="availableProperty" string="Available" class="oe_highlight" attrs="{'invisible': [('property_status','=','available')] }" type="object"/>
+                <!-- <button name="availableProperty" string="Available" class="oe_highlight" attrs="{'invisible': [('property_status','=','available')] }" type="object"/>
                 <button name="bookProperty" string="Book" property_status='available' attrs="{'invisible': [('|'),('property_status','=','sold'),('for_booking','=',False)] }" class="oe_highlight" type="object"/>
-                <button name="sellProperty" string="Sell" property_status='available' attrs="{'invisible': [('|'),('property_status','=','sold'),('for_sell','=',False)] }" class="oe_highlight" type="object"/>
+                <button name="sellProperty" string="Sell" property_status='available' attrs="{'invisible': [('|'),('property_status','=','sold'),('for_sell','=',False)] }" class="oe_highlight" type="object"/> -->
 
-                <field name='property_status' widget='statusbar'/>
+                <field name='property_status' invisible='1' widget='statusbar'/>
             </header>
 
                 <sheet>
-                    <group string="Property">
+                    <field name="photo" widget="image" class="oe_avatar"/>
+
+                            <div class="oe_title" style='padding-bottom: 10px;'>
+                                <!-- <span style='font-weight: 500;'>Property</span> -->
+                                <h1 style='padding-top: 5px;'>
+                                    <field name="priority" widget="priority" />
+                                    <field name="name" placeholder='Property title'/>
+                                </h1>
+                            </div>
+
+                    <group >
                 
                         <group>
-                            <field name="name"/>
-                            <field name="phone"/>
-                            <field name="email"/>
+                            <!-- <field name="name"/> -->
+                            <field name="address"/>
+                            <field name="postalcode"/>
                             
                             <field name="tag_ids" widget="many2many_tags"/>
                             <field name="category_id"/>
 
                             
                         </group>
-                        <group string='Sellect Currency'>
+                        <group string='Currency'>
 
                             <field name='currency_id'/>
 
-                            <group string='For Sell'>
-                                <field name='for_sell'/>
-                                <field name="selling_price"/>
+                            <group string='For Sell' invisible='1'>
+                                <field name='for_sell' invisible='1'/>
+                                <field name="selling_price" invisible='1'/>
                                
 
                             </group>
-                            <group string='For Booking'>
+                            <group >
                                 <field name='for_booking'/>
                                 <field name="booking_price"/>
 
@@ -90,7 +100,7 @@
 
                         </page>
 
-                        <page string="Photo">
+                        <!-- <page string="Photo">
                             <group>
                                 <group>
                                     <field name="photo" widget="image" />
@@ -98,9 +108,9 @@
                                 <group>
                                 </group>
                             </group>
-                        </page>
+                        </page> -->
 
-                        <page string="Address">
+                        <!-- <page string="Address">
                             <group>
                                 <group>
                                     <field name="address"/>
@@ -109,7 +119,7 @@
                                     <field name="postalcode"/>
                                 </group>
                             </group>
-                        </page>
+                        </page> -->
                         <page string="Description">
                             <group>
                                 <group>
@@ -126,8 +136,66 @@
         </field>
    </record>
 
+<!-- kanban view property -->
+  <record id="pms_property_view_kanban" model="ir.ui.view">
+            <field name="name">pms.property.kanban</field>
+            <field name="model">pms.property</field>
+            <field name="arch" type="xml">
+                <kanban default_order="create_date desc" class="o_res_partner_kanban" sample="1">
+                    <field name="id"/>
+                    <field name="name"/>
+                    <field name="email"/>
+                    <field name="phone"/>
+                    <field name="for_booking"/>
+                    <field name="currency_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div >
+                              
+                                <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                    
+                                    <field name="photo" widget="image" class="oe_avatar" />
+                                </div>
+                               
+                                <div class="ribbon ribbon-top-right" attrs="{'invisible': [('for_booking', '!=', True)]}">
+                                    <span class="bg-success">Ready</span>
+                                </div>
+                                <div class="ribbon ribbon-top-right" attrs="{'invisible': [('for_booking', '=', True)]}">
+                                    <span class="bg-warning">Not Ready</span>
+                                </div>
+                                <div class="oe_kanban_details d-flex flex-column justify-content-between">
 
+                                    <div class='pt-2 pb-1'>
+                                        <field name="priority" widget="priority" />
+                                    </div>
+                                    <div>
+                                    
+                                        <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong><br/>
+                                        
 
+                                        
+                                        <span class=" o_kanban_tags_section" style='color: chocolate;'><field name="category_id"/></span><br/>
+                                        
+                                        <span class=" o_kanban_tags_section"> Per Day -  <field name="booking_price"/></span>
+                                        <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                        <ul>
+<!--                                            
+                                            <li t-if="record.email.raw_value" class="o_text_overflow"><field name="email"/></li><br/>
+                                            <li t-if="record.phone.raw_value" class="o_text_overflow"><field name="phone"/></li><br/> -->
+                                            <li t-if="record.address.raw_value" class="o_text_overflow"><field name="address"/></li><br/>
+                                        </ul>
+                                    </div>
+                                    <div class="o_kanban_record_bottom">
+                                        <div class="oe_kanban_bottom_left"/>
+                                        <div class="oe_kanban_bottom_right"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
 
 <!-- tree view of proeprty -->
@@ -136,7 +204,16 @@
             <field name="model">pms.property</field>
             <field name="arch" type="xml">
                 <tree default_order="create_date desc">
-                   <field name="name" required="1"/>
+                   <field name="priority" widget="priority" />
+                   <field name="name"/>
+                   <field name="category_id" widget="badge" />
+                   <field name="tag_ids" widget="many2many_tags"/>
+                   <field name='currency_id' invisible='1' />
+                   <field name="booking_price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="phone" optional='hide'/>
+                    <field name="email" optional='hide'/>
+                   <field name="description" optional='hide'/>
+                   <field name="address" optional='hide'/>
                 </tree>
             </field>
         </record>
@@ -146,7 +223,7 @@
         <record id="action_pms_property" model="ir.actions.act_window">
             <field name="name">Properties</field>
             <field name="res_model">pms.property</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                 Create A Record

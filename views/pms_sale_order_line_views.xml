@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+
+
+
+
+<!-- action for property sale order line -->
+        <record id="action_pms_sale_order_line" model="ir.actions.act_window">
+            <field name="name">Sale Order Line</field>
+            <field name="res_model">pms.sale.order.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Create A Record
+                </p>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

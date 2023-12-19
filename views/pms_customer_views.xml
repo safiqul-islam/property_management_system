@@ -49,9 +49,17 @@
                                 </group>
 
                             </page>
-                            <page string='Invoicing'>
+                            <page string='Invoicing' attrs="{'invisible': [('is_broker','=',True)]}" >
                                 <field name='invoice_ids' readonly='1'/>
                             </page>
+
+                            <page string='Booking' attrs="{'invisible': [('is_broker','!=',True)]}" >
+                                <field name='booking_broker_ids' readonly='1'/>
+                            </page>
+
+
+
+                            
                             <!-- <page string='Booking'>
                                 <field name='booking_ids' readonly='1'/>
                             </page> -->
@@ -82,7 +90,7 @@
             <field name="name">pms.customer.kanban</field>
             <field name="model">pms.customer</field>
             <field name="arch" type="xml">
-                <kanban class="o_res_partner_kanban" sample="1">
+                <kanban default_order="create_date desc" class="o_res_partner_kanban" sample="1">
                     <field name="id"/>
                     <field name="name"/>
                     <field name="email"/>
@@ -90,16 +98,23 @@
                     <field name="is_broker"/>
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                            
                               
-                                <div class="o_kanban_image_fill_left o_kanban_image_full">
+                                <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                    
                                     <field name="photo" widget="image" class="oe_avatar" />
                                 </div>
                                
-                                <div class="ribbon ribbon-top-right" attrs="{'invisible': [('is_broker', '!=', True)]}">
-                                    <span class="bg-success">Agent</span>
-                                </div>
+                                
                                 <div class="oe_kanban_details d-flex flex-column justify-content-between">
+                                    
+
+                                    <div class="ribbon ribbon-top-right" attrs="{'invisible': [('is_broker', '!=', True)]}">
+                                        <span class="bg-success">Agent</span>
+                                    </div>
+                                    <div class="ribbon ribbon-top-right" attrs="{'invisible': [('is_broker', '=', True)]}">
+                                        <span class="bg-primary">Customer</span>
+                                    </div>
                                     <div>
                                         <strong class="o_kanban_record_title oe_partner_heading"><field name="name"/></strong><br/>
                                         <span class=" o_kanban_tags_section"><field name="occupation"/></span>
@@ -111,12 +126,12 @@
                                             <li t-if="record.address.raw_value" class="o_text_overflow"><field name="address"/></li><br/>
                                         </ul>
                                     </div>
-                                    <div class="o_kanban_record_bottom">
+                                    <!-- <div class="o_kanban_record_bottom">
                                         <div class="oe_kanban_bottom_left"/>
                                         <div class="oe_kanban_bottom_right"/>
-                                    </div>
+                                    </div> -->
                                 </div>
-                            </div>
+                            
                         </t>
                     </templates>
                 </kanban>

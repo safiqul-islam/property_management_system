@@ -21,8 +21,8 @@ class PmsPropertyContract(models.Model):
     customer_email = fields.Char(related="customer.email")
     customer_phone = fields.Char(related="customer.phone")
     purpose = fields.Selection([('rent', 'Rent'), ('booking', 'Booking')], string='Purpose', default='booking')
-    order_date = fields.Datetime(string='Order Date', default=fields.date.today())
-    expiration_date = fields.Datetime(string='Expiration', default=fields.date.today())
+    order_date = fields.Date(string='Order Date', default=fields.date.today())
+    expiration_date = fields.Date(string='Expiration', default=fields.date.today())
     payment_term = fields.Many2one( 'pms.payment.terms',string='Payment Terms')
     # currency_id = fields.Many2one(string="Currency", related='booking_line_ids.property_id.currency_id.id')
     
@@ -61,6 +61,8 @@ class PmsPropertyContract(models.Model):
 
     confirm_button_show = fields.Boolean(string='Confirm button show', default=False)
 
+
+    broker_id = fields.Many2one('pms.customer', string='Broker', )
     # sale_person = fields.Many2one( 'pms.customer' ,string='Sale person', default=lambda self:self.env.user )
 
     @api.model
